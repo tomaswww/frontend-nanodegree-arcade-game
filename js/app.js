@@ -43,13 +43,13 @@ class Enemy {
 class Player {
   //players characteristics
   constructor(sprite) {
-    this.sprite = sprite;
+    this.sprite = 'images/char-boy.png';
     this.score = 0;
     this.level = 1;
     this.lifes = 3;
     //position
-    this.x = 202;
-    this.y = 405;
+    this.x = 200;
+    this.y = 400;
     //move size
     this.xSize = 101;
     this.ySize = 83;
@@ -61,7 +61,7 @@ class Player {
   // a handleInput() method.
   handleInput(key) {
     // character :Start
-    if (key === "up" && this.y == 405) {
+    if (key === "up" && this.y == 400) {
       start.updatePlayer(this.x);
     }
     if (key === "down" && this.y == 322) {
@@ -70,11 +70,11 @@ class Player {
     // character: Start
     if (key === "up" && this.y > 0) {
       this.y -= this.ySize;
-    } else if (key === "down" && this.y < 404) {
+    } else if (key === "down" && this.y < 400) {
       this.y += this.ySize;
     } else if (key === "left" && this.x > 0) {
       this.x -= this.xSize;
-    } else if (key === "right" && this.x < 404) {
+    } else if (key === "right" && this.x < 400) {
       this.x += this.xSize;
     }
   }
@@ -101,20 +101,21 @@ function board(level,score) {
 };
 // Place the player object in a variable called player
 let player = new Player("images/char-boy.png");
+
 const start = {
   //for enemy
-rowPosition: [55, 155, 220],
+EnemyRowPosition: [55, 155, 220],
+//playerRowPosition:[]
 //starts all
   init: function(){
-    this.allEnemies = [];
-    this.nextRow = 0;
+    allEnemies = [];
+    nextRow = 0;
     this.create();
     this.displayLifes();
   },
   //here I give x axis value and speed.
-  newVals:function()
-  {
-    let speed = Math.floor(Math.random() * 100 + 5 * player.level);
+  newVals:function(){
+    let speed = Math.floor(Math.random() * 100 + 10 * player.level);
     let initX = - Math.floor(Math.random() * 500 + 100);
     return {
       speed: speed,
@@ -123,10 +124,10 @@ rowPosition: [55, 155, 220],
   },
   // Place all enemy objects in an array called allEnemies
   create: function() {
-    for (let row of this.rowPosition) {
+    for (let row of this.EnemyRowPosition) {
       let val = this.newVals();
       let enemy = new Enemy(val.initX, row, val.speed);
-      this.allEnemies.push(enemy);
+      allEnemies.push(enemy);
     }
   },
   //here It sets the difficult setting enemies
