@@ -45,8 +45,8 @@ class Enemy {
 class Player {
   //players characteristics
   constructor(sprite) {
-    thius.sprite = sprite;
-    this.score = score;
+    this.sprite = sprite;
+    this.score = 0;
     this.level = 1;
     this.lifes = 3;
     //position
@@ -69,9 +69,9 @@ class Player {
       this.score += 5;
       this.level++;
       board(this.level, this.score)
-      start.difficulty();
+      setDifficult();
     }
-  };
+  }
   handleInput(key) {
     // character :Start
     if (key === "up" && this.y == 405) {
@@ -90,27 +90,29 @@ class Player {
     } else if (key === "right" && this.x < 404) {
       this.x += this.xSize;
     }
-  };
+  }
   render() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-  };
+  }
 };
 // Now instantiate your objects.
 // Update score and level in board
-function board(level, score) {
+function board(level,score) {
   document.querySelector(".score-value").textContent = score;
   document.querySelector(".level-value").textContent = level;
 };
 // Place the player object in a variable called player
+let player = new Player("images/char-boy.png");
+
 const start ={
-
-rowPosition: [65, 148, 229],
-
-  initialize: function() {
+  //for enemy
+rowPosition: [55, 155, 220],
+  init: function() {
     this.allEnemies = [];
     this.nextRow = 0;
     this.create();
     this.displayLifes();
+    //character sprite
   },
   // Place all enemy objects in an array called allEnemies
   create: function() {
@@ -123,15 +125,15 @@ rowPosition: [65, 148, 229],
   displayLifes: function() {
     let lifes = document.querySelector(".lifes");
     lifes.innerHTML = "";
-    for (let i = 0; i < Player.lifes; i++) {
+    for (let i = 0; i < player.lifes; i++) {
       var newContent = document.createTextNode("+");
       lifes.appendChild(newContent);
-    };
+    }
   },
-  newVals()
+  newVals:function()
   //function used to give x axis value and speed.
   {
-    let speed = Math.floor(Math.random() * 100 + 5 * Player.level);
+    let speed = Math.floor(Math.random() * 100 + 5 * player.level);
     let Xo = -Math.floor(Math.random() * 500 + 100);
     return {
       speed: speed,
@@ -148,12 +150,12 @@ rowPosition: [65, 148, 229],
     if (this.allEnemies.length == 6) {
       this.allEnemies.splice(0, 1);
     }
-    let enemy = new Enemy(values.initX, row, values.speed);
+    let enemy = new Enemy(values.Xo, row, values.speed);
     this.allEnemies.push(enemy);
   }
 }
 
-start.initialize();
+start.init();
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
 document.addEventListener('keyup', function(e) {
