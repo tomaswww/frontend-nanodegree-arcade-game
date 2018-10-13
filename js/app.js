@@ -55,7 +55,7 @@ class Player {
     this.ySize = 83;
     //characters dimentions
     this.height = 20;
-    this.widht = 60;
+    this.width = 60;
   }
   // This class requires an update(), render() and
   // a handleInput() method.
@@ -105,8 +105,8 @@ const start = {
   //for enemy
 rowPosition: [55, 155, 220],
 //starts all
-  init: function() {
-    this.allEnemies=[];
+  init: function(){
+    this.allEnemies = [];
     this.nextRow = 0;
     this.create();
     this.displayLifes();
@@ -115,17 +115,17 @@ rowPosition: [55, 155, 220],
   newVals:function()
   {
     let speed = Math.floor(Math.random() * 100 + 5 * player.level);
-    let Xo = - Math.floor(Math.random() * 500 + 100);
+    let initX = - Math.floor(Math.random() * 500 + 100);
     return {
       speed: speed,
-      Xo: Xo
+      initX: initX
     }
   },
   // Place all enemy objects in an array called allEnemies
   create: function() {
     for (let row of this.rowPosition) {
       let val = this.newVals();
-      let enemy = new Enemy(val.Xo, row, val.speed);
+      let enemy = new Enemy(val.initX, row, val.speed);
       this.allEnemies.push(enemy);
     }
   },
@@ -140,14 +140,14 @@ rowPosition: [55, 155, 220],
     if (this.allEnemies.length == 6) {
       this.allEnemies.splice(0, 1);
     }
-    let enemy = new Enemy(values.Xo, row, values.speed);
+    let enemy = new Enemy(values.initX, row, values.speed);
     this.allEnemies.push(enemy);
   },
   displayLifes: function() {
     let lifes = document.querySelector(".lifes");
     lifes.innerHTML = "";
     for (let i = 0; i < player.lifes; i++) {
-      var newContent = document.createTextNode("+");
+      var newContent = document.createTextNode("❤️");
       lifes.appendChild(newContent);
     }
   }
