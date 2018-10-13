@@ -45,14 +45,14 @@ render() {
 // Now write your own player class
 class Player {
   //players characteristics
-  constructor(sprite){
-    thius.sprite=sprite;
-    this.score=score;
-    this.level=1;
-    this.lifes=3;
+  constructor(sprite) {
+    thius.sprite = sprite;
+    this.score = score;
+    this.level = 1;
+    this.lifes = 3;
     //position
     this.x = 202;
-    this.y= 405;
+    this.y = 405;
     //move size
     this.xSize = 101;
     this.ySize = 83;
@@ -60,65 +60,87 @@ class Player {
     this.height = 20;
     this.widht = 60;
   }
-// This class requires an update(), render() and
-// a handleInput() method.
-update(){
-  //player wins whe reaches the water
-  if (this.y== -10){
-    this.x= 202;
-    this.y=322;
-    this.score += 5;
-    this.level++;
-    board(this.level,this.score)
-    start.difficulty();
-  }
-};
-handleInput(key){
-  // character :Start
-        if (key === "up" && this.y == 405) {
-            start.updatePlayer(this.x);
-        }
-        if (key === "down" && this.y == 322) {
-            start.returnSelector();
-        }
-        // character: Start
-        if (key === "up" && this.y > 0){
-            this.y -= this.ySize;
-        }
-        else if (key === "down" && this.y < 404){
-            this.y += this.ySize;
-        }
-        else if (key === "left" && this.x > 0){
-            this.x -= this.xSize;
-        }
-        else if (key === "right" && this.x < 404){
-            this.x += this.xSize;
-        }
-};
-render(){
-  ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-};
-
-// Now instantiate your objects.
-// Update score and level in board
-function board(level, score) {
-    document.querySelector(".score-value").textContent = score;
-    document.querySelector(".level-value").textContent = level;
-};
-// Place all enemy objects in an array called allEnemies
-// Place the player object in a variable called player
-
-
-
-// This listens for key presses and sends the keys to your
-// Player.handleInput() method. You don't need to modify this.
-document.addEventListener('keyup', function(e) {
-  var allowedKeys = {
-    37: 'left',
-    38: 'up',
-    39: 'right',
-    40: 'down'
+  // This class requires an update(), render() and
+  // a handleInput() method.
+  update() {
+    //player wins whe reaches the water
+    if (this.y == -10) {
+      this.x = 202;
+      this.y = 322;
+      this.score += 5;
+      this.level++;
+      board(this.level, this.score)
+      start.difficulty();
+    }
+  };
+  handleInput(key) {
+    // character :Start
+    if (key === "up" && this.y == 405) {
+      start.updatePlayer(this.x);
+    }
+    if (key === "down" && this.y == 322) {
+      start.returnSelector();
+    }
+    // character: Start
+    if (key === "up" && this.y > 0) {
+      this.y -= this.ySize;
+    } else if (key === "down" && this.y < 404) {
+      this.y += this.ySize;
+    } else if (key === "left" && this.x > 0) {
+      this.x -= this.xSize;
+    } else if (key === "right" && this.x < 404) {
+      this.x += this.xSize;
+    }
+  };
+  render() {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
   };
 
-  player.handleInput(allowedKeys[e.keyCode]);
-});
+  // Now instantiate your objects.
+  // Update score and level in board
+  function board(level, score) {
+    document.querySelector(".score-value").textContent = score;
+    document.querySelector(".level-value").textContent = level;
+  };
+  // Place the player object in a variable called player
+  const start = {
+    init: function() {
+      this.allEnemies = [];
+      this.nextRow = 0;
+      this.create();
+      this.displayLifes();
+    }
+    // Place all enemy objects in an array called allEnemies
+    create: function(){
+      for (let row of this.rowPosition){
+        let val = this.newVals();
+        let enemy = new Enemy(val.Xo, row,val.speed);
+        this.allEnemies.push(enemy);
+      }
+    };
+    displayLifes();
+    newVals();
+    //function used to give x axis value and speed.
+    {
+      let speed = Math.floor(Math.random() * 100 + 5 * player.level);
+      let Xo = - Math.floor(Math.random() * 500 + 100);
+      return{
+        speed: speed;
+        Xo: Xo;
+      }
+    }
+  }
+
+
+  // This listens for key presses and sends the keys to your
+  // Player.handleInput() method. You don't need to modify this.
+  document.addEventListener('keyup', function(e) {
+    var allowedKeys = {
+      37: 'left',
+      38: 'up',
+      39: 'right',
+      40: 'down'
+    };
+
+    player.handleInput(allowedKeys[e.keyCode]);
+  });
