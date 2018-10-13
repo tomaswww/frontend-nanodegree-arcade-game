@@ -69,11 +69,32 @@ update(){
     this.y=322;
     this.score += 5;
     this.level++;
-    hud(this.level,this.score)
+    board(this.level,this.score)
     start.difficulty();
   }
 };
-handleInput();
+handleInput(key){
+  // character :Start
+        if (key === "up" && this.y == 405) {
+            start.updatePlayer(this.x);
+        }
+        if (key === "down" && this.y == 322) {
+            start.returnSelector();
+        }
+        // character: Start
+        if (key === "up" && this.y > 0){
+            this.y -= this.ySize;
+        }
+        else if (key === "down" && this.y < 404){
+            this.y += this.ySize;
+        }
+        else if (key === "left" && this.x > 0){
+            this.x -= this.xSize;
+        }
+        else if (key === "right" && this.x < 404){
+            this.x += this.xSize;
+        }
+};
 render(){
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
