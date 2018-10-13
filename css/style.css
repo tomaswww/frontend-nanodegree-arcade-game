@@ -1,3 +1,24 @@
 body {
     text-align: center;
 }
+.board{
+  display:flex;
+  height:2em;
+  justify-content: space-around;
+  background-color: #00ff3082;
+  border-radius: 0.5em;
+  font-family: Montserrat;
+}
+.lifes{
+  height:1em;
+  padding:0.25em;
+
+}
+.score{
+  height: 1em;
+  padding:0.25em;
+}
+.level{
+  padding:0.25em;
+  height: 1em;
+}
