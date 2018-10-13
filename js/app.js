@@ -100,6 +100,11 @@ render(){
 };
 
 // Now instantiate your objects.
+// Update score and level in board
+function board(level, score) {
+    document.querySelector(".score-value").textContent = score;
+    document.querySelector(".level-value").textContent = level;
+};
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 
