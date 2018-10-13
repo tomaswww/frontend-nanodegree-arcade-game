@@ -24,7 +24,7 @@ class Enemy {
       this.x = -100;
     }
     //checking for collision
-    if (this.x === player.x && this.y === player.y) {
+    if (player.x < this.x + 60 && this.x < player.x + 60 && player.y < this.y + 60 && this.y < player.y + 60) {
       player.x = 202;
       player.y = 322;
       //takes life and ends game when out of lifes
