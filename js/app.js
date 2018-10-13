@@ -12,14 +12,13 @@ class Enemy {
     this.height = 80;
     this.width = 65;
   }
-};
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
 update(dt) {
+  this.x += dt * this.speed;
   // You should multiply any movement by the dt parameter
   // which will ensure the game runs at the same speed for
   // all computers.
-  this.x += dt * this.speed;
   //looping the enemies
   if (this.x > 500) {
     this.x = -100;
@@ -35,7 +34,7 @@ update(dt) {
       start.modal(start.endModal);
     }
   }
-};
+}
 // Draw the enemy on the screen, required method for game
 render() {
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
@@ -95,10 +94,10 @@ class Player {
   render() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
   };
-
+};
   // Now instantiate your objects.
   // Update score and level in board
-  function board(level, score) {
+  function board(level,score) {
     document.querySelector(".score-value").textContent = score;
     document.querySelector(".level-value").textContent = level;
   };
@@ -109,7 +108,7 @@ class Player {
         this.nextRow = 0;
         this.create();
         this.displayLifes();
-      }
+      },
       // Place all enemy objects in an array called allEnemies
       create: function() {
         for (let row of this.rowPosition) {
@@ -117,7 +116,7 @@ class Player {
           let enemy = new Enemy(val.Xo, row, val.speed);
           this.allEnemies.push(enemy);
         }
-      };
+      },
       displayLifes: function() {
         let lifes = document.querySelector(".lifes");
         lifes.innerHTML = "";
@@ -125,14 +124,15 @@ class Player {
           var newContent = document.createTextNode("+");
           lifes.appendChild(newContent);
         };
-        newVals();
+},
+        newVals()
         //function used to give x axis value and speed.
         {
           let speed = Math.floor(Math.random() * 100 + 5 * player.level);
           let Xo = -Math.floor(Math.random() * 500 + 100);
           return {
-            speed: speed;
-            Xo: Xo;
+            speed: speed,
+            Xo: Xo
           }
         }
       }
