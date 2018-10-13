@@ -62,7 +62,17 @@ class Player {
   }
 // This class requires an update(), render() and
 // a handleInput() method.
-update();
+update(){
+  //player wins whe reaches the water
+  if (this.y== -10){
+    this.x= 202;
+    this.y=322;
+    this.score += 5;
+    this.level++;
+    hud(this.level,this.score)
+    start.difficulty();
+  }
+};
 handleInput();
 render(){
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
