@@ -61,16 +61,16 @@ class Player {
   // a handleInput() method.
   handleInput(key) {
     // character :Start
-    if (arrowKey == 'left' && this.x > 0 ){
+    if (key == 'left' && this.x > 0 ){
       this.x = this.x - 100;
     }
-    if (arrowKey == 'right' && this.x < 400){
+    if (key == 'right' && this.x < 400){
       this.x = this.x + 100;
     }
-    if (arrowKey == 'up' && this.y > 0){
+    if (key == 'up' && this.y > 0){
       this.y = this.y - 90;
     }
-    if (arrowKey == 'down' && this.y < 400){
+    if (key == 'down' && this.y < 400){
       this.y = this.y + 90;
     }
   }
