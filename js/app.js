@@ -88,8 +88,8 @@ class Player {
       this.score += 5;
       this.level++;
       board(this.level, this.score)
-      start.setDifficult();
       alert("that's a win!");
+      start.setDifficult();
     }
   }
   render() {
@@ -108,7 +108,6 @@ let player = new Player("images/char-boy.png");
 const start = {
   //for enemy
 EnemyRowPosition: [55, 155, 220],
-//playerRowPosition:[]
 //starts all
   init: function(){
     allEnemies = [];
@@ -118,7 +117,7 @@ EnemyRowPosition: [55, 155, 220],
   },
   //here I give x axis value and speed.
   newVals:function(){
-    let speed = Math.floor(Math.random() * 100 + 10 * player.level);
+    let speed = Math.floor(Math.random() * 100 + 10 * player.score);
     let initX = - Math.floor(Math.random() * 500 + 100);
     return {
       speed: speed,
