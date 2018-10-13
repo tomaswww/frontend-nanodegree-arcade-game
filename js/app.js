@@ -7,7 +7,7 @@ class Enemy {
   constructor(x, y, speed) {
     this.x = x;
     this.y = y;
-    thius.speed = speed;
+    this.speed = speed;
     this.sprite = 'images/enemy-bug.png';
     this.height = 80;
     this.width = 65;
@@ -102,7 +102,10 @@ function board(level, score) {
   document.querySelector(".level-value").textContent = level;
 };
 // Place the player object in a variable called player
-const start = {
+const start ={
+
+rowPosition: [65, 148, 229],
+
   initialize: function() {
     this.allEnemies = [];
     this.nextRow = 0;
@@ -120,7 +123,7 @@ const start = {
   displayLifes: function() {
     let lifes = document.querySelector(".lifes");
     lifes.innerHTML = "";
-    for (let i = 0; i < player.lifes; i++) {
+    for (let i = 0; i < Player.lifes; i++) {
       var newContent = document.createTextNode("+");
       lifes.appendChild(newContent);
     };
@@ -128,13 +131,13 @@ const start = {
   newVals()
   //function used to give x axis value and speed.
   {
-    let speed = Math.floor(Math.random() * 100 + 5 * player.level);
+    let speed = Math.floor(Math.random() * 100 + 5 * Player.level);
     let Xo = -Math.floor(Math.random() * 500 + 100);
     return {
       speed: speed,
       Xo: Xo
     }
-  }
+  },
   setDifficult: function() {
     let value = this.newVals();
     let row = this.rowPosition[this.nextRow];
