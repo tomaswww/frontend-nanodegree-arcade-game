@@ -133,16 +133,16 @@ EnemyRowPosition: [55, 155, 220],
   //here It sets the difficult setting enemies
   setDifficult: function() {
     let value = this.newVals();
-    let row = this.EnemyrowPosition[this.nextRow];
+    let row = this.EnemyRowPosition[this.nextRow];
     this.nextRow++;
-    if (this.nextRow == 3) {
+    if (this.nextRow === 3) {
       this.nextRow = 0;
     }
-    if (this.allEnemies.length == 6) {
-      this.allEnemies.splice(0, 1);
+    if (allEnemies.length === 6) {
+      this.allEnemies.splice(0,1);
     }
-    let enemy = new Enemy(values.initX, row, values.speed);
-    this.allEnemies.push(enemy);
+    let enemy = new Enemy(value.initX, row, value.speed);
+    allEnemies.push(enemy);
   },
   displayLifes: function() {
     let lifes = document.querySelector(".lifes");
