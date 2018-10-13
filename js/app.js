@@ -33,6 +33,9 @@ class Enemy {
       //this is what happens when you loose!
       if(player.lifes===0){
         var openLink = window.open(["https://me.me/i/yourea-loser-the-youre-a-loser-trump-poster-from-the-20425849"]);
+      player.lifes=3;
+      player.score=0;
+      start.displayLifes();
       }
 }
   }
@@ -139,7 +142,7 @@ EnemyRowPosition: [55, 155, 220],
       this.nextRow = 0;
     }
     if (allEnemies.length === 6) {
-      this.allEnemies.splice(0,1);
+      allEnemies.splice(0,1);
     }
     let enemy = new Enemy(value.initX, row, value.speed);
     allEnemies.push(enemy);
