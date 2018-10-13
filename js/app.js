@@ -38,6 +38,7 @@ class Enemy {
       player.level=1;
       board(player.level,player.score);
       start.displayLifes();
+      start.init();
       }
 }
   }
