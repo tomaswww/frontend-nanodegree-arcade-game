@@ -30,10 +30,8 @@ class Enemy {
       //takes life and ends game when out of lifes
       player.lifes--;
       start.displayLifes();
-      if (player.lifes === 0) {
-        start.modal(start.endModal);
+      //must add what happens when you loose!
       }
-    }
   }
   // Draw the enemy on the screen, required method for game
   render() {
@@ -61,17 +59,6 @@ class Player {
   }
   // This class requires an update(), render() and
   // a handleInput() method.
-  update() {
-    //player wins whe reaches the water
-    if (this.y == -10) {
-      this.x = 202;
-      this.y = 322;
-      this.score += 5;
-      this.level++;
-      board(this.level, this.score)
-      setDifficult();
-    }
-  }
   handleInput(key) {
     // character :Start
     if (key === "up" && this.y == 405) {
@@ -91,10 +78,21 @@ class Player {
       this.x += this.xSize;
     }
   }
+  update() {
+    //player wins whe reaches the water
+    if (this.y == -10) {
+      this.x = 202;
+      this.y = 322;
+      this.score += 5;
+      this.level++;
+      board(this.level, this.score)
+      start.setDifficult();
+    }
+  }
   render() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
   }
-};
+}
 // Now instantiate your objects.
 // Update score and level in board
 function board(level,score) {
@@ -103,16 +101,25 @@ function board(level,score) {
 };
 // Place the player object in a variable called player
 let player = new Player("images/char-boy.png");
-
-const start ={
+const start = {
   //for enemy
 rowPosition: [55, 155, 220],
+//starts all
   init: function() {
-    this.allEnemies = [];
+    this.allEnemies=[];
     this.nextRow = 0;
     this.create();
     this.displayLifes();
-    //character sprite
+  },
+  //here I give x axis value and speed.
+  newVals:function()
+  {
+    let speed = Math.floor(Math.random() * 100 + 5 * player.level);
+    let Xo = - Math.floor(Math.random() * 500 + 100);
+    return {
+      speed: speed,
+      Xo: Xo
+    }
   },
   // Place all enemy objects in an array called allEnemies
   create: function() {
@@ -122,24 +129,7 @@ rowPosition: [55, 155, 220],
       this.allEnemies.push(enemy);
     }
   },
-  displayLifes: function() {
-    let lifes = document.querySelector(".lifes");
-    lifes.innerHTML = "";
-    for (let i = 0; i < player.lifes; i++) {
-      var newContent = document.createTextNode("+");
-      lifes.appendChild(newContent);
-    }
-  },
-  newVals:function()
-  //function used to give x axis value and speed.
-  {
-    let speed = Math.floor(Math.random() * 100 + 5 * player.level);
-    let Xo = -Math.floor(Math.random() * 500 + 100);
-    return {
-      speed: speed,
-      Xo: Xo
-    }
-  },
+  //here It sets the difficult setting enemies
   setDifficult: function() {
     let value = this.newVals();
     let row = this.rowPosition[this.nextRow];
@@ -152,9 +142,16 @@ rowPosition: [55, 155, 220],
     }
     let enemy = new Enemy(values.Xo, row, values.speed);
     this.allEnemies.push(enemy);
+  },
+  displayLifes: function() {
+    let lifes = document.querySelector(".lifes");
+    lifes.innerHTML = "";
+    for (let i = 0; i < player.lifes; i++) {
+      var newContent = document.createTextNode("+");
+      lifes.appendChild(newContent);
+    }
   }
 }
-
 start.init();
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
