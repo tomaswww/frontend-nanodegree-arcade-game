@@ -104,43 +104,49 @@ class Player {
   };
   // Place the player object in a variable called player
   const start = {
-    init: function() {
-      this.allEnemies = [];
-      this.nextRow = 0;
-      this.create();
-      this.displayLifes();
-    }
-    // Place all enemy objects in an array called allEnemies
-    create: function(){
-      for (let row of this.rowPosition){
-        let val = this.newVals();
-        let enemy = new Enemy(val.Xo, row,val.speed);
-        this.allEnemies.push(enemy);
+      init: function() {
+        this.allEnemies = [];
+        this.nextRow = 0;
+        this.create();
+        this.displayLifes();
       }
-    };
-    displayLifes();
-    newVals();
-    //function used to give x axis value and speed.
-    {
-      let speed = Math.floor(Math.random() * 100 + 5 * player.level);
-      let Xo = - Math.floor(Math.random() * 500 + 100);
-      return{
-        speed: speed;
-        Xo: Xo;
+      // Place all enemy objects in an array called allEnemies
+      create: function() {
+        for (let row of this.rowPosition) {
+          let val = this.newVals();
+          let enemy = new Enemy(val.Xo, row, val.speed);
+          this.allEnemies.push(enemy);
+        }
+      };
+      displayLifes: function() {
+        let lifes = document.querySelector(".lifes");
+        lifes.innerHTML = "";
+        for (let i = 0; i < player.lifes; i++) {
+          var newContent = document.createTextNode("+");
+          lifes.appendChild(newContent);
+        };
+        newVals();
+        //function used to give x axis value and speed.
+        {
+          let speed = Math.floor(Math.random() * 100 + 5 * player.level);
+          let Xo = -Math.floor(Math.random() * 500 + 100);
+          return {
+            speed: speed;
+            Xo: Xo;
+          }
+        }
       }
-    }
-  }
 
 
-  // This listens for key presses and sends the keys to your
-  // Player.handleInput() method. You don't need to modify this.
-  document.addEventListener('keyup', function(e) {
-    var allowedKeys = {
-      37: 'left',
-      38: 'up',
-      39: 'right',
-      40: 'down'
-    };
+      // This listens for key presses and sends the keys to your
+      // Player.handleInput() method. You don't need to modify this.
+      document.addEventListener('keyup', function(e) {
+        var allowedKeys = {
+          37: 'left',
+          38: 'up',
+          39: 'right',
+          40: 'down'
+        };
 
-    player.handleInput(allowedKeys[e.keyCode]);
-  });
+        player.handleInput(allowedKeys[e.keyCode]);
+      });
