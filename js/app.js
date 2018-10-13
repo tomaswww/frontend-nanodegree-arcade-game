@@ -35,6 +35,8 @@ class Enemy {
         var openLink = window.open(["https://me.me/i/yourea-loser-the-youre-a-loser-trump-poster-from-the-20425849"]);
       player.lifes=3;
       player.score=0;
+      player.level=1;
+      board(player.level,player.score);
       start.displayLifes();
       }
 }
@@ -111,13 +113,13 @@ EnemyRowPosition: [55, 155, 220],
 //starts all
   init: function(){
     allEnemies = [];
-    nextRow = 0;
+    this.nextRow = 0;
     this.create();
     this.displayLifes();
   },
   //here I give x axis value and speed.
   newVals:function(){
-    let speed = Math.floor(Math.random() * 100 + 10 * player.score);
+    let speed = 100 + 10 * player.score;
     let initX = - Math.floor(Math.random() * 500 + 100);
     return {
       speed: speed,
@@ -140,7 +142,7 @@ EnemyRowPosition: [55, 155, 220],
     if (this.nextRow === 3) {
       this.nextRow = 0;
     }
-    if (allEnemies.length === 6) {
+    if (allEnemies.length === 10) {
       allEnemies.splice(0,1);
     }
     let enemy = new Enemy(value.initX, row, value.speed);
