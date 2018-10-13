@@ -61,21 +61,17 @@ class Player {
   // a handleInput() method.
   handleInput(key) {
     // character :Start
-    if (key === "up" && this.y == 400) {
-      start.updatePlayer(this.x);
+    if (arrowKey == 'left' && this.x > 0 ){
+      this.x = this.x - 100;
     }
-    if (key === "down" && this.y == 322) {
-      start.returnSelector();
+    if (arrowKey == 'right' && this.x < 400){
+      this.x = this.x + 100;
     }
-    // character: Start
-    if (key === "up" && this.y > 0) {
-      this.y -= this.ySize;
-    } else if (key === "down" && this.y < 400) {
-      this.y += this.ySize;
-    } else if (key === "left" && this.x > 0) {
-      this.x -= this.xSize;
-    } else if (key === "right" && this.x < 400) {
-      this.x += this.xSize;
+    if (arrowKey == 'up' && this.y > 0){
+      this.y = this.y - 90;
+    }
+    if (arrowKey == 'down' && this.y < 400){
+      this.y = this.y + 90;
     }
   }
   update() {
