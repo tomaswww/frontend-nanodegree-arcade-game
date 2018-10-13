@@ -25,13 +25,16 @@ class Enemy {
     }
     //checking for collision
     if (player.x < this.x + 60 && this.x < player.x + 60 && player.y < this.y + 60 && this.y < player.y + 60) {
-      player.x = 202;
-      player.y = 322;
+      player.x = 200;
+      player.y = 320;
       //takes life and ends game when out of lifes
       player.lifes--;
       start.displayLifes();
-      //must add what happens when you loose!
+      //this is what happens when you loose!
+      if(player.lifes===0){
+        var openLink = window.open(["https://me.me/i/yourea-loser-the-youre-a-loser-trump-poster-from-the-20425849"]);
       }
+}
   }
   // Draw the enemy on the screen, required method for game
   render() {
@@ -76,13 +79,14 @@ class Player {
   }
   update() {
     //player wins whe reaches the water
-    if (this.y == -10) {
-      this.x = 202;
-      this.y = 322;
+    if (this.y < 10) {
+      this.x = 200;
+      this.y = 400;
       this.score += 5;
       this.level++;
       board(this.level, this.score)
       start.setDifficult();
+      alert("that's a win!");
     }
   }
   render() {
@@ -129,7 +133,7 @@ EnemyRowPosition: [55, 155, 220],
   //here It sets the difficult setting enemies
   setDifficult: function() {
     let value = this.newVals();
-    let row = this.rowPosition[this.nextRow];
+    let row = this.EnemyrowPosition[this.nextRow];
     this.nextRow++;
     if (this.nextRow == 3) {
       this.nextRow = 0;
