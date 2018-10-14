@@ -26,7 +26,7 @@ class Enemy {
     //checking for collision
     if (player.x < this.x + 60 && this.x < player.x + 60 && player.y < this.y + 60 && this.y < player.y + 60) {
       player.x = 200;
-      player.y = 320;
+      player.y = 400;
       //takes life and ends game when out of lifes
       player.lifes--;
       start.displayLifes();
@@ -161,6 +161,7 @@ const start = {
       lifes.appendChild(newContent);
     }
   },
+  //displays medals and trophees according to level. 1 trophee each 5 medals
   displayWins: function() {
     if (player.level === 1) {
       let wins = document.querySelector(".medalBoard");
