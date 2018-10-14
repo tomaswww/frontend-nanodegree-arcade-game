@@ -25,9 +25,8 @@ class Enemy {
     }
     //checking for collision
     if (player.x < this.x + 60 && this.x < player.x + 60 && player.y < this.y + 60 && this.y < player.y + 60) {
-      player.x = 200;
-      player.y = 400;
-      //takes life and ends game when out of lifes
+      player.reset()
+    //takes life and ends game when out of lifes
       player.lifes--;
       start.displayLifes();
       //this is what happens when you loose!
@@ -99,6 +98,10 @@ class Player {
   }
   render() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+  },
+  reset() {
+    player.x = 200;
+    player.y = 400;
   }
 }
 // Now instantiate your objects.
