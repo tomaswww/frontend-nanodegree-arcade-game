@@ -86,8 +86,7 @@ class Player {
   update() {
     //player wins whe reaches the water
     if (this.y < 10) {
-      this.x = 200;
-      this.y = 400;
+      this.reset();
       this.score += 5;
       this.level++;
       board(this.level, this.score)
