@@ -35,7 +35,7 @@ class Enemy {
         player.lifes = 3;
         player.score = 0;
         player.level = 1;
-        board(player.level, player.score);
+        player.board(1,0);
         start.displayLifes();
         start.init();
         player.displayWins();
@@ -89,7 +89,7 @@ class Player {
       this.reset();
       this.score += 5;
       this.level++;
-      board(this.level, this.score)
+      this.board(this.level, this.score)
       alert("It's a win! 🏆");
       start.setDifficult();
       this.displayWins();
@@ -123,13 +123,14 @@ class Player {
         }
       }
     }
+    board(level, score) {
+      document.querySelector(".score-value").textContent = score;
+      document.querySelector(".level-value").textContent = level;
+    }
 }
 // Now instantiate your objects.
 // Update score and level in board
-function board(level, score) {
-  document.querySelector(".score-value").textContent = score;
-  document.querySelector(".level-value").textContent = level;
-};
+
 // Place the player object in a variable called player
 let player = new Player("images/char-boy.png");
 
