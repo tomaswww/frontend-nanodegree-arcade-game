@@ -111,9 +111,9 @@ function board(level, score) {
 let player = new Player("images/char-boy.png");
 
 const start = {
-  //for enemy
-  EnemyRowPosition: [55, 155, 220],
-  //starts all
+  //for enemy positions
+  EnemyRowPosition: [60, 145, 225],
+  //initializes all
   init: function() {
     allEnemies = [];
     this.nextRow = 0;
@@ -121,7 +121,7 @@ const start = {
     this.displayLifes();
     this.displayWins();
   },
-  //here I give x axis value and speed.
+  //here I give x axis a random value and speed.
   newVals: function() {
     let speed = 100 + 10 * player.score;
     let initX = -Math.floor(Math.random() * 500 + 100);
@@ -153,6 +153,7 @@ const start = {
     let enemy = new Enemy(value.initX, row, value.speed);
     allEnemies.push(enemy);
   },
+  //sets lifes.. I choose to use emojis by unicode.
   displayLifes: function() {
     let lifes = document.querySelector(".lifes");
     lifes.innerHTML = "";
@@ -161,7 +162,7 @@ const start = {
       lifes.appendChild(newContent);
     }
   },
-  //displays medals and trophees according to level. 1 trophee each 5 medals
+  //Displays medals and trophees unicodes according to level (1 trophee each 5 medals)
   displayWins: function() {
     if (player.level === 1) {
       let wins = document.querySelector(".medalBoard");
