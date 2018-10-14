@@ -26,7 +26,7 @@ class Enemy {
     //checking for collision
     if (player.x < this.x + 60 && this.x < player.x + 60 && player.y < this.y + 60 && this.y < player.y + 60) {
       player.reset()
-    //takes life and ends game when out of lifes
+      //takes life and ends game when out of lifes
       player.lifes--;
       start.displayLifes();
       //this is what happens when you loose!
@@ -38,7 +38,7 @@ class Enemy {
         board(player.level, player.score);
         start.displayLifes();
         start.init();
-        start.displayWins();
+        player.displayWins();
       }
     }
   }
@@ -92,16 +92,37 @@ class Player {
       board(this.level, this.score)
       alert("It's a win! 🏆");
       start.setDifficult();
-      start.displayWins();
+      this.displayWins();
     }
   }
   render() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-  },
-  reset() {
-    player.x = 200;
-    player.y = 400;
-  }
+      ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    }
+    reset() {
+      player.x = 200;
+      player.y = 400;
+    }
+    //Displays medals and trophees unicodes according to level (1 trophee each 5 medals)
+    displayWins() {
+      if (this.level === 1) {
+        let wins = document.querySelector(".medalBoard");
+        wins.innerHTML = "";
+      }
+      if (this.level > 1) {
+        let wins = document.querySelector(".medalBoard");
+        let trophees = Math.floor((player.level - 1) / 5);
+        let medals = ((this.level - 1) % 5);
+        wins.innerHTML = "";
+        for (let i = 0; i < medals; i++) {
+          var newContent = document.createTextNode("🥇");
+          wins.appendChild(newContent);
+        }
+        for (let i = 0; i < trophees; i++) {
+          var newContent = document.createTextNode("🏆");
+          wins.appendChild(newContent);
+        }
+      }
+    }
 }
 // Now instantiate your objects.
 // Update score and level in board
@@ -121,7 +142,7 @@ const start = {
     this.nextRow = 0;
     this.create();
     this.displayLifes();
-    this.displayWins();
+    player.displayWins();
   },
   //here I give x axis a random value and speed.
   newVals: function() {
@@ -163,28 +184,8 @@ const start = {
       var newContent = document.createTextNode("❤️");
       lifes.appendChild(newContent);
     }
-  },
-  //Displays medals and trophees unicodes according to level (1 trophee each 5 medals)
-  displayWins: function() {
-    if (player.level === 1) {
-      let wins = document.querySelector(".medalBoard");
-      wins.innerHTML = "";
-    }
-    if (player.level>1){
-    let wins = document.querySelector(".medalBoard");
-    let trophees = Math.floor((player.level-1)/5);
-    let medals = ((player.level-1)%5);
-    wins.innerHTML = "";
-    for (let i = 0; i < medals; i++) {
-      var newContent = document.createTextNode("🥇");
-      wins.appendChild(newContent);
-    }
-    for (let i = 0; i < trophees; i++) {
-      var newContent = document.createTextNode("🏆");
-      wins.appendChild(newContent);
-    }
   }
-}};
+};
 start.init();
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
