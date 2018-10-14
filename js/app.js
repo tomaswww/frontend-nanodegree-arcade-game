@@ -31,16 +31,17 @@ class Enemy {
       player.lifes--;
       start.displayLifes();
       //this is what happens when you loose!
-      if(player.lifes===0){
+      if (player.lifes === 0) {
         var openLink = window.open(["https://me.me/i/yourea-loser-the-youre-a-loser-trump-poster-from-the-20425849"]);
-      player.lifes=3;
-      player.score=0;
-      player.level=1;
-      board(player.level,player.score);
-      start.displayLifes();
-      start.init();
+        player.lifes = 3;
+        player.score = 0;
+        player.level = 1;
+        board(player.level, player.score);
+        start.displayLifes();
+        start.init();
+        start.displayWins();
       }
-}
+    }
   }
   // Draw the enemy on the screen, required method for game
   render() {
@@ -70,16 +71,16 @@ class Player {
   // a handleInput() method.
   handleInput(key) {
     // character :Start
-    if (key == 'left' && this.x > 0 ){
+    if (key == 'left' && this.x > 0) {
       this.x = this.x - 100;
     }
-    if (key == 'right' && this.x < 400){
+    if (key == 'right' && this.x < 400) {
       this.x = this.x + 100;
     }
-    if (key == 'up' && this.y > 0){
+    if (key == 'up' && this.y > 0) {
       this.y = this.y - 90;
     }
-    if (key == 'down' && this.y < 400){
+    if (key == 'down' && this.y < 400) {
       this.y = this.y + 90;
     }
   }
@@ -91,8 +92,9 @@ class Player {
       this.score += 5;
       this.level++;
       board(this.level, this.score)
-      alert("that's a win!");
+      alert("It's a win! 🏆");
       start.setDifficult();
+      start.displayWins();
     }
   }
   render() {
@@ -101,7 +103,7 @@ class Player {
 }
 // Now instantiate your objects.
 // Update score and level in board
-function board(level,score) {
+function board(level, score) {
   document.querySelector(".score-value").textContent = score;
   document.querySelector(".level-value").textContent = level;
 };
@@ -110,18 +112,19 @@ let player = new Player("images/char-boy.png");
 
 const start = {
   //for enemy
-EnemyRowPosition: [55, 155, 220],
-//starts all
-  init: function(){
+  EnemyRowPosition: [55, 155, 220],
+  //starts all
+  init: function() {
     allEnemies = [];
     this.nextRow = 0;
     this.create();
     this.displayLifes();
+    this.displayWins();
   },
   //here I give x axis value and speed.
-  newVals:function(){
+  newVals: function() {
     let speed = 100 + 10 * player.score;
-    let initX = - Math.floor(Math.random() * 500 + 100);
+    let initX = -Math.floor(Math.random() * 500 + 100);
     return {
       speed: speed,
       initX: initX
@@ -143,8 +146,9 @@ EnemyRowPosition: [55, 155, 220],
     if (this.nextRow === 3) {
       this.nextRow = 0;
     }
-    if (allEnemies.length === 10) {
-      allEnemies.splice(0,1);
+    //avoid getting it too much enemycrowded
+    if (allEnemies.length === 7) {
+      allEnemies.splice(0, 1);
     }
     let enemy = new Enemy(value.initX, row, value.speed);
     allEnemies.push(enemy);
@@ -156,8 +160,27 @@ EnemyRowPosition: [55, 155, 220],
       var newContent = document.createTextNode("❤️");
       lifes.appendChild(newContent);
     }
+  },
+  displayWins: function() {
+    if (player.level === 1) {
+      let wins = document.querySelector(".medalBoard");
+      wins.innerHTML = "";
+    }
+    if (player.level>1){
+    let wins = document.querySelector(".medalBoard");
+    let trophees = Math.floor((player.level-1)/5);
+    let medals = ((player.level-1)%5);
+    wins.innerHTML = "";
+    for (let i = 0; i < medals; i++) {
+      var newContent = document.createTextNode("🥇");
+      wins.appendChild(newContent);
+    }
+    for (let i = 0; i < trophees; i++) {
+      var newContent = document.createTextNode("🏆");
+      wins.appendChild(newContent);
+    }
   }
-}
+}};
 start.init();
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
