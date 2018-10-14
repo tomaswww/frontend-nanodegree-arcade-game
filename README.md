@@ -22,7 +22,15 @@ As this is my first app coding, you may find that many of the loops and code cou
 ## Usability
 
 All game components are usable across modern desktop, tablet, and phone browsers without any installation required.
-keyboard arrows must be used to move across de board.
+
+
+## Set up & play!
+
+First you must open the **index.html** file on your browser.
+Your character should be down on the grass.
+Make sure you use keyboard arrows to move across de board.
+You must try to get to the water without being caught by the bugs crossing by!.
+Try to get as much trophies or medals as you can (1 trophy = 5 medals).
 
 Good luck and give it your best try!!
 
