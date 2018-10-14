@@ -35,7 +35,7 @@ class Enemy {
         player.lifes = 3;
         player.score = 0;
         player.level = 1;
-        player.board(1,0);
+        player.board(1, 0);
         start.displayLifes();
         start.init();
         player.displayWins();
@@ -96,37 +96,37 @@ class Player {
     }
   }
   render() {
-      ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+  }
+  reset() {
+    player.x = 200;
+    player.y = 400;
+  }
+  //Displays medals and trophees unicodes according to level (1 trophee each 5 medals)
+  displayWins() {
+    if (this.level === 1) {
+      let wins = document.querySelector(".medalBoard");
+      wins.innerHTML = "";
     }
-    reset() {
-      player.x = 200;
-      player.y = 400;
-    }
-    //Displays medals and trophees unicodes according to level (1 trophee each 5 medals)
-    displayWins() {
-      if (this.level === 1) {
-        let wins = document.querySelector(".medalBoard");
-        wins.innerHTML = "";
+    if (this.level > 1) {
+      let wins = document.querySelector(".medalBoard");
+      let trophees = Math.floor((player.level - 1) / 5);
+      let medals = ((this.level - 1) % 5);
+      wins.innerHTML = "";
+      for (let i = 0; i < medals; i++) {
+        var newContent = document.createTextNode("🥇");
+        wins.appendChild(newContent);
       }
-      if (this.level > 1) {
-        let wins = document.querySelector(".medalBoard");
-        let trophees = Math.floor((player.level - 1) / 5);
-        let medals = ((this.level - 1) % 5);
-        wins.innerHTML = "";
-        for (let i = 0; i < medals; i++) {
-          var newContent = document.createTextNode("🥇");
-          wins.appendChild(newContent);
-        }
-        for (let i = 0; i < trophees; i++) {
-          var newContent = document.createTextNode("🏆");
-          wins.appendChild(newContent);
-        }
+      for (let i = 0; i < trophees; i++) {
+        var newContent = document.createTextNode("🏆");
+        wins.appendChild(newContent);
       }
     }
-    board(level, score) {
-      document.querySelector(".score-value").textContent = score;
-      document.querySelector(".level-value").textContent = level;
-    }
+  }
+  board(level, score) {
+    document.querySelector(".score-value").textContent = score;
+    document.querySelector(".level-value").textContent = level;
+  }
 }
 // Now instantiate your objects.
 // Update score and level in board
