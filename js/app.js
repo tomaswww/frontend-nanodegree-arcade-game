@@ -10,7 +10,7 @@ class Enemy {
     this.speed = speed;
     this.sprite = 'images/enemy-bug.png';
     this.height = 80;
-    this.width = 65;
+    this.width = 64;
   }
   // Update the enemy's position, required method for game
   // Parameter: dt, a time delta between ticks
