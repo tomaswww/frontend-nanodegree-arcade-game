@@ -34,4 +34,4 @@ Try to get as much trophies or medals as you can (1 trophy = 5 medals).
 
 Good luck and give it your best try!!
 
-> Stay positive and happy. Work hard and don't give up hope. Be open to criticism and keep learning. Surround yourself with happy, warm and genuine people. **Tena Desae**
+> Knowledge is of no value unless you put it into practice. **Anton Chekhov**
